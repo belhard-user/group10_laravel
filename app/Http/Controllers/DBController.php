@@ -73,12 +73,39 @@ class DBController extends Controller
 
     public function select()
     {
-        $db = DB::table('test')
+       /* $db = DB::table('test')
             ->orderBy('name', 'desc')
-            ->get();
+            ->get();*/
+
+       // $db = DB::table('test')->select('email', 'name as n')->distinct()->get();
+        // $db = DB::table('test')->select(DB::raw('email, sum(age) as age'))->groupBy('email')->get();
+
+        /*$db = DB::table('test')
+            ->crossJoin('users')
+            ->select('test.age', 'users.email', 'users.password')
+            ->get();*/
+
+        //$db = DB::table('test')->whereNotBetween('age', [18, 30])->get();
+        //$db = DB::table('test')->whereMonth('updated_at', '4')->get();
+        // $db = DB::table('test')->whereColumn('created_at', '>', 'updated_at')->get();
+        // $db = DB::table('test')->latest('id')->get();
+        // $db = DB::table('test')->skip(5)->take(4)->get();
+        $db = DB::table('test')->max('age');
+        $db = DB::table('test')->sum('age');
 
         \Debugbar::info($db);
 
         return view('db.all');
+    }
+
+    public function showForm()
+    {
+        return view('db.show-form');
+    }
+
+    public function storeForm(Request $request)
+    {
+        dd(\Request::except('_token'));
+        dd($request->except('_token'));
     }
 }
