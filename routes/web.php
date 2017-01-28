@@ -10,6 +10,9 @@ Route::group(['prefix' => 'db'], function($r) {
     $r->get('delete', 'DBController@delete');
     $r->get('create-record', 'DBController@showForm');
     $r->post('create-record', 'DBController@storeForm');
+    $r->get('edit-record/{id}', 'DBController@editForm');
+    $r->put('edit-record/{id}', 'DBController@updateForm');
+    $r->get('select-model', 'DBController@selectModel');
 });
 
 Route::group(['prefix' => 'news'], function($route){

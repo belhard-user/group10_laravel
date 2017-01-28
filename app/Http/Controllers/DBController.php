@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Test;
 use Barryvdh\Debugbar\Middleware\Debugbar;
+use ClassesWithParents\D;
 use DB;
 use Faker\Factory;
 use Illuminate\Http\Request;
@@ -105,7 +107,44 @@ class DBController extends Controller
 
     public function storeForm(Request $request)
     {
-        dd(\Request::except('_token'));
-        dd($request->except('_token'));
+        // DB::table('test')->insert($request->except('_token'));
+        // $model = new Test($request->except('_token'));
+        /*$model = new Test();
+
+        $model->email = $request->get('email');
+        $model->name = $request->get('name');
+        $model->user_role = $request->get('user_role');
+        $model->age = $request->get('age');*/
+
+        $model = Test::firstOrNew($request->except('_token'));
+
+        $model->save();
+
+        return view('db.all');
+    }
+
+    public function editForm($id)
+    {
+        $model = DB::table('test')->whereId($id)->first();
+
+        return view('db.edit', compact('model'));
+    }
+
+    public function updateForm(Request $request, $id)
+    {
+        DB::table('test')->whereId($id)->update($request->except('_token', '_method'));
+
+        return redirect()->back();
+    }
+
+    public function selectModel()
+    {
+        $r = Test::first();
+
+
+        dd($r->full_name);
+
+
+        return view('db.all');
     }
 }

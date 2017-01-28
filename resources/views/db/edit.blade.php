@@ -3,8 +3,8 @@
 
 @section('content')
 
-    {{ Form::open(['action' => 'DBController@storeForm']) }}
-    @include('db.partials', ['btnText' => 'Создать'])
+    {{ Form::model($model, ['action' => ['DBController@updateForm', 'id' => $model->id], 'method' => 'put']) }}
+    @include('db.partials', ['btnText' => 'Обновить'])
     {{ Form::close() }}
 
     {{--<form action="" method="post">
