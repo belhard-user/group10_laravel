@@ -12,7 +12,7 @@ class ArticleController extends Controller
         return view('article.create');
     }
 
-    public function store(Request $request)
+    public function store(\App\Http\Requests\ArticleRequest $request)
     {
         $data = $request->except('_token');
 
