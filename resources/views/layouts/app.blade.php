@@ -22,6 +22,7 @@
     <div id="app">
         @include('partials.nav')
         <div class="container">
+            @include('errors.error')
             @yield('content')
         </div>
     </div>

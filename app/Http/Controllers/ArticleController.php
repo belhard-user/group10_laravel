@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Article;
-use Illuminate\Http\Request;
+use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -20,7 +19,7 @@ class ArticleController extends Controller
         return view('article.create');
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
         Article::create($request->all());
 
@@ -37,7 +36,7 @@ class ArticleController extends Controller
         return view('article.edit', compact('article'));
     }
 
-    public function update(Article $article, Request $request)
+    public function update(Article $article, ArticleRequest $request)
     {
         $article->update($request->all());
 
