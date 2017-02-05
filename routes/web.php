@@ -13,6 +13,7 @@ Route::group(['prefix' => 'db'], function($r) {
     $r->get('edit-record/{id}', 'DBController@editForm');
     $r->put('edit-record/{id}', 'DBController@updateForm');
     $r->get('select-model', 'DBController@selectModel');
+    $r->get('relation', 'DBController@relations');
 });
 
 Route::group(['prefix' => 'news'], function($route){

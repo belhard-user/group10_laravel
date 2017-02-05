@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Address;
 use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
@@ -19,5 +20,10 @@ class Test extends Model
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucfirst($value);
+    }
+
+    public function address()
+    {
+        return $this->hasMany(Address::class);
     }
 }

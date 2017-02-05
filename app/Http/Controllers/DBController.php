@@ -147,4 +147,30 @@ class DBController extends Controller
 
         return view('db.all');
     }
+
+    public function relations()
+    {
+        /*$test = \App\Test::with('address')->get();
+
+        foreach ($test as $user) {
+            echo "<h2>{$user->name}</h2>";
+            if ($user->address->count()){
+                echo "<ul>";
+                foreach ($user->address as $a) {
+                    echo "<li>{$a->address}</li>";
+                }
+                echo "</ul>";
+            }
+        }*/
+
+        /*$address = \App\Address::first();
+
+        dd($address->test->name);*/
+
+        \App\Test::first()->address()->create([
+            'address' => 'Manhattan street 10'
+        ]);
+
+        return view('db.all');
+    }
 }
