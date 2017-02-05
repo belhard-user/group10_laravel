@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -41,5 +42,17 @@ class ArticleController extends Controller
         $article->update($request->all());
 
         return redirect()->route('news.index');
+    }
+
+    public function addComment(Article $article, Request $request)
+    {
+        $this->validate($request, ['message' => 'required']);
+
+        $data = $request->all();
+        $data['user_id'] = auth()->id();
+
+        $article->comment()->create($data);
+
+        return redirect()->back();
     }
 }

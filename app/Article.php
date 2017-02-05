@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -21,5 +22,15 @@ class Article extends Model
         return $query
             ->where('created_at', '<=', \Carbon\Carbon::now())
             ->orderBy($field, 'DESC');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

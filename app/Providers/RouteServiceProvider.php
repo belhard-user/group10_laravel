@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         \Route::bind('article', function($article){
-            return \App\Article::where('slug', $article)->first();
+            return \App\Article::with('comment', 'comment.user')->where('slug', $article)->first();
         });
     }
 

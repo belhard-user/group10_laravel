@@ -9,6 +9,7 @@ Route::group(['prefix' => 'news'], function($route){
     $route->get('/{article}', ['uses' => 'ArticleController@view', 'as' => 'news.view']);
     $route->get('/{article}/edit', ['uses' => 'ArticleController@edit', 'as' => 'news.edit']);
     $route->put('/{article}/update', ['uses' => 'ArticleController@update', 'as' => 'news.update']);
+    $route->post('{article}/add-comment', ['uses' => 'ArticleController@addComment', 'as' => 'news.comment']);
 });
 
 Auth::routes();
