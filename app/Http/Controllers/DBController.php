@@ -173,4 +173,39 @@ class DBController extends Controller
 
         return view('db.all');
     }
+
+    public function many()
+    {
+        $p = \App\Phone::first();
+        $p->employee()->attach([2,4], ['data' => 'Дибилы']);
+
+        //Удаление телефонов
+        /*$e = \App\Employee::first();
+        $e->phone()->sync([3,6]);*/
+
+        // достать телефоны работника
+        /*$e = \App\Employee::first();
+        dd($e->phone->toArray());*/
+
+
+        // прикрепляем телефону к работнику
+        /*$e = \App\Employee::first();
+        $e->phone()->attach([1,2,4]);*/
+
+        /*DB::table('phones')->insert([
+            ['phone' => '123'],
+            ['phone' => '124'],
+            ['phone' => '125'],
+            ['phone' => '126'],
+            ['phone' => '127'],
+            ['phone' => '128'],
+            ['phone' => '129'],
+        ]);
+
+        DB::table('employees')->insert([
+            ['name' => 'Neo'],
+            ['name' => 'Tank'],
+            ['name' => 'Trinity']
+        ]);*/
+    }
 }

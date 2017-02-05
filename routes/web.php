@@ -14,6 +14,7 @@ Route::group(['prefix' => 'db'], function($r) {
     $r->put('edit-record/{id}', 'DBController@updateForm');
     $r->get('select-model', 'DBController@selectModel');
     $r->get('relation', 'DBController@relations');
+    $r->get('many-to-many', 'DBController@many');
 });
 
 Route::group(['prefix' => 'news'], function($route){
