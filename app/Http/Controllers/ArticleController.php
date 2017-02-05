@@ -21,7 +21,7 @@ class ArticleController extends Controller
 
     public function store(ArticleRequest $request)
     {
-        Article::create($request->all());
+        auth()->user()->article()->create($request->all());
 
         return redirect()->back();
     }
