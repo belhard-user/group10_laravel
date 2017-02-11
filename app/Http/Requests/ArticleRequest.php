@@ -26,7 +26,8 @@ class ArticleRequest extends FormRequest
         $rule = [
             'title' => 'required|min:3|max:140|unique:articles',
             'body' => 'required',
-            'short_description' => 'required|max:255'
+            'short_description' => 'required|max:255',
+            'tag_list' => 'required'
         ];
 
         if ($this->route()->getName() == 'news.update') {

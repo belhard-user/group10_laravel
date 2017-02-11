@@ -13,4 +13,9 @@
     {{ Form::textarea('body', null, ['class' => 'form-control']) }}
 </div>
 
+<div class="form-group">
+    {{ Form::label('tag_list', 'Категории') }}
+    {{ Form::select('tag_list[]', \App\Tag::getTagList(), null, ['class' => 'form-control', 'multiple']) }}
+</div>
+
 {{ Form::submit($btnText, ['class' => 'btn btn-primary']) }}

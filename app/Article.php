@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Comment;
+use App\Tag;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -32,5 +33,15 @@ class Article extends Model
     public function comment()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function getTagListAttribute()
+    {
+        return $this->tag()->pluck('id')->toArray();
     }
 }
