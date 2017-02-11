@@ -16,6 +16,7 @@ class DBController extends Controller
     public function __construct()
     {
         $this->faker = Factory::create();
+        $this->middleware('admin', ['only' => 'update']);
     }
 
     public function insert()
