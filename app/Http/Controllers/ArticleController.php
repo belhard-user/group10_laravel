@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use II;
 use App\Article;
-use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\ArticleRequest;
+use Illuminate\Http\UploadedFile;
 
 class ArticleController extends Controller
 {
@@ -31,6 +33,8 @@ class ArticleController extends Controller
 
         $article->tag()->attach($request->get('tag_list'));
 
+        $this->uploadImages($request, $article);
+
         return redirect()->back();
     }
 
@@ -50,6 +54,8 @@ class ArticleController extends Controller
 
         $article->tag()->sync($request->get('tag_list'));
 
+        $this->uploadImages($request, $article);
+
         return redirect()->route('news.index');
     }
 
@@ -63,5 +69,34 @@ class ArticleController extends Controller
         $article->comment()->create($data);
 
         return redirect()->back();
+    }
+
+    /**
+     * @param ArticleRequest $request
+     * @param $article
+     */
+    private function uploadImages(ArticleRequest $request, Article $article)
+    {
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            $storagePath = sprintf('%s/%s', 'images', $article->id);
+
+            foreach ($images as $image) {
+                /** @var UploadedFile $image */
+                $fileName = time()  . '_' . $image->getClientOriginalName();
+                $path = $image->storeAs($storagePath, $fileName, 'image');
+
+                $thImage = '/th-' . $fileName;
+
+                II::make(public_path($path))
+                    ->fit(200)
+                    ->save(public_path($storagePath) . $thImage);
+
+                $article->images()->create([
+                    'path' => $path,
+                    'th_path' => $storagePath . $thImage
+                ]);
+            }
+        }
     }
 }

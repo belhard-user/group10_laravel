@@ -14,6 +14,11 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('images', 'Картинки') }}
+    {{ Form::file('images[]', ['class' => 'form-control', 'multiple']) }}
+</div>
+
+<div class="form-group">
     {{ Form::label('tag_list', 'Категории') }}
     {{ Form::select('tag_list[]', \App\Tag::getTagList(), null, ['class' => 'form-control', 'multiple']) }}
 </div>

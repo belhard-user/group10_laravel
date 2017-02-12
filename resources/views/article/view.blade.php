@@ -9,7 +9,16 @@
         @endcan
     </div>
     <h2>{{ $article->title }}</h2>
-    <p>{{ $article->body }}</p>
+    <div class="row">
+        <div class="col-md-4"><p>{{ $article->body }}</p></div>
+        <div class="col-md-8">
+            @unless($article->images->isEmpty())
+                @foreach($article->images as $image)
+                    <img src="/{{ $image->th_path }}" alt="{{ $article->title }}">
+                @endforeach
+            @endunless
+        </div>
+    </div>
     @if($article->tag->count())
         <ul>
             @foreach($article->tag as $tag)

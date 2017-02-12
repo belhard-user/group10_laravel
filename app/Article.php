@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Comment;
+use App\Image;
 use App\Tag;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,23 +26,43 @@ class Article extends Model
             ->orderBy($field, 'DESC');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function comment()
     {
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function tag()
     {
         return $this->belongsToMany(Tag::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function getTagListAttribute()
     {
         return $this->tag()->pluck('id')->toArray();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
