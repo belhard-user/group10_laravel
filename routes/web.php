@@ -2,6 +2,10 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::group(['prefix' => 'files'], function($r){
+    $r->get('/', 'FileController@index');
+    $r->post('upload', 'FileController@upload');
+});
 
 Route::group(['prefix' => 'db'], function($r) {
     $r->get('insert', 'DBController@insert');
