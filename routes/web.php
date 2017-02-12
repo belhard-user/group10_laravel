@@ -7,8 +7,8 @@ Route::group(['prefix' => 'news'], function($route){
     $route->post('create', ['uses' => 'ArticleController@store', 'as' => 'news.store']);
     $route->get('/', ['uses' => 'ArticleController@index', 'as' => 'news.index']);
     $route->get('/{article}', ['uses' => 'ArticleController@view', 'as' => 'news.view']);
-    $route->get('/{article}/edit', ['uses' => 'ArticleController@edit', 'as' => 'news.edit']);
-    $route->put('/{article}/update', ['uses' => 'ArticleController@update', 'as' => 'news.update']);
+    $route->get('/{article}/edit', ['uses' => 'ArticleController@edit', 'as' => 'news.edit'])->middleware('can:update-article,article');
+    $route->put('/{article}/update', ['uses' => 'ArticleController@update', 'as' => 'news.update'])->middleware('can:update-article,article');
     $route->post('{article}/add-comment', ['uses' => 'ArticleController@addComment', 'as' => 'news.comment']);
 });
 

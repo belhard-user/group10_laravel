@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'view']]);
+    }
+
     public function index()
     {
         $articles = Article::populate()->paginate();
