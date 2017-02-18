@@ -35,7 +35,10 @@ class ArticleController extends Controller
 
         $this->uploadImages($request, $article);
 
-        return redirect()->back();
+        flash('Пост ' . $article->title . ' добавлен');
+
+
+        return redirect()->route('news.index');
     }
 
     public function view(Article $article)
@@ -55,6 +58,8 @@ class ArticleController extends Controller
         $article->tag()->sync($request->get('tag_list'));
 
         $this->uploadImages($request, $article);
+
+        flash('Пост ' . $article->title . ' обновлен');
 
         return redirect()->route('news.index');
     }

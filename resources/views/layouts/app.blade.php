@@ -29,5 +29,9 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/notify.min.js"></script>
+
+    @include('partials.notify')
+
 </body>
 </html>
