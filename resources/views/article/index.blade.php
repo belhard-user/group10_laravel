@@ -3,7 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('news.create') }}" class="btn btn-danger btn-lg">Создать</a>
+            <a href="{{ route('news.create') }}" class="btn btn-danger btn-lg">
+                {{ trans('other.создать') }}
+            </a>
         </div>
     </div>
     @foreach($articles as $article)

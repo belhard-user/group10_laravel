@@ -25,6 +25,8 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
+                <li><a href="{{ route(Request::route()->getName(), ['lang' => 'ru']) }}">Русский</a></li>
+                <li><a href="{{ route(Request::route()->getName(), ['lang' => 'en']) }}">English</a></li>
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Вход</a></li>
                     <li><a href="{{ url('/register') }}">Регистрация</a></li>
@@ -40,7 +42,7 @@
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    Logout
+                                    {{ trans('other.выход') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

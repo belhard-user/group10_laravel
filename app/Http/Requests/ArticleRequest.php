@@ -36,4 +36,12 @@ class ArticleRequest extends FormRequest
 
         return $rule;
     }
+
+    /*public function messages()
+    {
+        return [
+            'title.required' => ':attribute надо заполнить',
+            'short_description.required' => 'краткое описание заполнить нужно вам'
+        ];
+    }*/
 }
